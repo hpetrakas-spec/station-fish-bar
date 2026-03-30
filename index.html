@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Fish Bar | Shirley Local Chippy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 8px;}
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-left: 20px;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-btn {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        .nav-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(37,99,235,0.3); }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url('./assets/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.85) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
+        .hero p { font-size: 1.4rem; font-weight: 400; color: #e2e8f0; margin-bottom: 40px; }
+        .hero-btn {
+            display: inline-block;
+            background: white;
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            background: #f8fafc;
+        }
+
+        /* About Section */
+        .section { padding: 90px 20px; max-width: 1100px; margin: auto; text-align: center; }
+        .section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+        .section p.lead { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto 50px; line-height: 1.7; }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .menu-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f1f5f9;
+            text-align: left;
+        }
+        .menu-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1); }
+        .menu-image { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
+        .menu-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; }
+        .menu-card p { color: var(--text-light); line-height: 1.6; }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+        footer h3 { font-size: 2rem; margin-bottom: 10px; }
+        footer p { color: #94a3b8; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 40px auto;
+            text-align: left;
+        }
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+        }
+        .contact-card h4 { font-size: 1.3rem; margin-bottom: 15px; color: #f8fafc; }
+        .contact-card ul { list-style: none; color: #cbd5e1; font-size: 1.1rem; line-height: 1.8; }
+        .contact-card span { display: block; margin-bottom: 10px; color: #cbd5e1; }
+        .copyright { color: #475569; font-size: 0.9rem; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">🐟 Station Fish Bar</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#location">Location</a>
+            <a href="delivery.html" class="nav-btn">Order Online</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Fresh, Hot, Classic.</h1>
+            <p>Shirley's favorite local chippy serving legendary fish, chips, pies, and kebabs.</p>
+            <a href="delivery.html" class="hero-btn">Order Delivery or Collect</a>
+        </div>
+    </header>
+
+    <!-- About -->
+    <section id="about" class="section">
+        <h2>A Shirley Tradition</h2>
+        <p class="lead">We pride ourselves on using top-quality ingredients, from our crispy golden batter to freshly sourced fish. Whether you're a local regular or just passing through, our family-run bar is ready to serve you the perfect takeaway experience.</p>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section id="menu" class="section" style="background: white; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; max-width: 100%;">
+        <div style="max-width: 1100px; margin: auto;">
+            <h2>Menu Highlights</h2>
+            <p class="lead" style="margin-bottom: 0;">Our best-sellers that keep customers coming back.</p>
+            
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/04654ee207a57ce8d46665ebeb575e24" alt="Classic Fish and Chips" class="menu-image">
+                    <h3>Classic Fish & Chips</h3>
+                    <p>Sustainably caught, thickly battered, and served with a mountain of chunky, authentic chip shop chips. Add mushy peas to complete the masterpiece.</p>
+                </div>
+                <div class="menu-card">
+                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/a8c4ebc581122dfbf8ee55306ea1658d" alt="Hot Pies" class="menu-image">
+                    <h3>Pukka Pies</h3>
+                    <p>Deliciously flaky pastry packed with rich, savory fillings. Choose from Steak & Kidney, Chicken & Mushroom, or our hearty Minced Beef pies.</p>
+                </div>
+                <div class="menu-card">
+                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/fce641b14d7d11b47f0d47ece8053d35" alt="Doner Kebab" class="menu-image">
+                    <h3>Kebabs & Burgers</h3>
+                    <p>Not in the mood for fish? We offer generously portioned Doner Kebabs served fresh from the spit, alongside juicy, fully loaded burgers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Location -->
+    <footer id="location">
+        <h3>Visit Us Today</h3>
+        <p>Bypass the delivery fees and call us directly for collection.</p>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h4>📍 Location</h4>
+                <span>341 Haslucks Green Rd</span>
+                <span>Shirley, Solihull</span>
+                <span>B90 2NG</span>
+                <br>
+                <a href="tel:01217441234" style="color: white; text-decoration: none; font-weight: 700; font-size: 1.2rem; background: var(--primary); padding: 10px 20px; border-radius: 8px; display: inline-block;">☎️ Call 01217441234</a>
+            </div>
+            <div class="contact-card">
+                <h4>🕒 Opening Hours</h4>
+                <ul>
+                    <li><strong>Mon - Sat:</strong> 16:30 - 22:00</li>
+                    <li style="color: #ef4444; margin-top: 10px;"><strong>Sunday:</strong> Closed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2026 Station Fish Bar. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Fish Bar | Shirley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --uber: #06C167;
+            --deliveroo: #00CCBC;
+            --justeat: #F36D00;
+            --call: #2563EB;
+            --text-dark: #0f172a;
+            --surface: rgba(255, 255, 255, 0.85);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { 
+            height: 100%; 
+            font-family: 'Outfit', sans-serif; 
+            background-color: #0f172a; 
+            color: var(--text-dark); 
+        }
+        .hero-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('./assets/hero.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.85) 100%);
+            z-index: -1;
+        }
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { 
+            font-size: 2.8rem; 
+            font-weight: 800; 
+            color: var(--text-dark); 
+            margin-bottom: 5px; 
+            letter-spacing: -1px; 
+        }
+        p.subtitle { 
+            font-size: 1.15rem; 
+            color: #475569; 
+            margin-bottom: 35px; 
+            font-weight: 500; 
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 700;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        
+        /* Brand Colors */
+        .btn-uber { background: black; color: white; }
+        .btn-uber span { color: var(--uber); margin-left: 6px; }
+        .btn-deliveroo { background: var(--deliveroo); color: white; }
+        .btn-justeat { background: var(--justeat); color: white; }
+        .btn-call { background: var(--call); color: white; margin-top: 20px; }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #64748b;
+            margin: 25px 0 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; border-bottom: 1px solid #cbd5e1;
+        }
+        .divider:not(:empty)::before { margin-right: 15px; }
+        .divider:not(:empty)::after { margin-left: 15px; }
+
+        .footer-info {
+            margin-top: 35px;
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.5);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .address { font-weight: 700; margin-bottom: 15px; color: #1e293b; font-size: 1.05rem; }
+        .hours { display: flex; justify-content: space-between; max-width: 250px; margin: 0 auto 8px; font-weight: 500;}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+        <a href="index.html" style="font-weight: 800; font-size: 1.4rem; color: #0f172a; text-decoration: none;">🐟 Station Fish Bar</a>
+        <a href="index.html" style="color: #64748b; text-decoration: none; font-weight: 600;">Back to Home</a>
+    </nav>
+    <div class="hero-bg"></div>
+    <div class="overlay"></div>
+    
+    <div class="container">
+        <div class="card">
+            <h1>Station Fish Bar</h1>
+            <p class="subtitle">Fresh, Local, Classic.</p>
+            
+            <a href="https://www.ubereats.com/" target="_blank" class="btn btn-uber">Order on <span> Uber Eats</span></a>
+            <a href="https://deliveroo.co.uk/" target="_blank" class="btn btn-deliveroo">Order on Deliveroo</a>
+            <a href="https://www.just-eat.co.uk/" target="_blank" class="btn btn-justeat">Order on Just Eat</a>
+            
+            <div class="divider">or bypass the fees</div>
+            
+            <a href="tel:01217441234" class="btn btn-call">☎️ Call for Collection</a>
+            
+            <div class="footer-info">
+                <div class="address">📍 341 Haslucks Green Rd<br>Shirley, Solihull, B90 2NG</div>
+                <div class="hours"><span>Mon - Sat</span> <span>16:30 - 22:00</span></div>
+                <div class="hours"><span>Sunday</span> <span>Closed</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
