@@ -1,245 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station Fish Bar | Shirley Local Chippy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2563EB;
-            --text-dark: #0f172a;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
-            --surface: #ffffff;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { 
-            font-family: 'Outfit', sans-serif; 
-            background-color: var(--bg-light); 
-            color: var(--text-dark); 
-            scroll-behavior: smooth;
-        }
-        
-        /* Navigation Bar */
-        nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        .logo { font-weight: 800; font-size: 1.4rem; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 8px;}
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-left: 20px;
-            font-size: 1.05rem;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-btn {
-            background: var(--primary);
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 20px;
-        }
-        .nav-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(37,99,235,0.3); }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background-image: url('./assets/hero.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.85) 100%);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            color: white;
-            max-width: 800px;
-            padding: 0 20px;
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
-        .hero p { font-size: 1.4rem; font-weight: 400; color: #e2e8f0; margin-bottom: 40px; }
-        .hero-btn {
-            display: inline-block;
-            background: white;
-            color: var(--text-dark);
-            font-weight: 800;
-            font-size: 1.2rem;
-            padding: 18px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .hero-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            background: #f8fafc;
-        }
-
-        /* About Section */
-        .section { padding: 90px 20px; max-width: 1100px; margin: auto; text-align: center; }
-        .section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
-        .section p.lead { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto 50px; line-height: 1.7; }
-
-        /* Menu Grid */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .menu-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f1f5f9;
-            text-align: left;
-        }
-        .menu-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1); }
-        .menu-image { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; }
-        .menu-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; }
-        .menu-card p { color: var(--text-light); line-height: 1.6; }
-
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 80px 20px 40px;
-            text-align: center;
-        }
-        footer h3 { font-size: 2rem; margin-bottom: 10px; }
-        footer p { color: #94a3b8; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            max-width: 900px;
-            margin: 40px auto;
-            text-align: left;
-        }
-        .contact-card {
-            background: rgba(255,255,255,0.05);
-            padding: 30px;
-            border-radius: 12px;
-        }
-        .contact-card h4 { font-size: 1.3rem; margin-bottom: 15px; color: #f8fafc; }
-        .contact-card ul { list-style: none; color: #cbd5e1; font-size: 1.1rem; line-height: 1.8; }
-        .contact-card span { display: block; margin-bottom: 10px; color: #cbd5e1; }
-        .copyright { color: #475569; font-size: 0.9rem; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Station Fish Bar | Fish &amp; Chips in Shirley, Solihull</title>
+    <meta name="description" content="Station Fish Bar on Haslucks Green Road, Shirley: fish and chips, kebabs, burgers and pies. Call ahead to collect, or order delivery on Just Eat, Deliveroo or Uber Eats.">
+    <meta name="theme-color" content="#7a1f2b">
+    <meta property="og:type" content="restaurant">
+    <meta property="og:title" content="Station Fish Bar | Fish &amp; Chips in Shirley">
+    <meta property="og:description" content="Fish and chips, kebabs, burgers and pies on Haslucks Green Road, Shirley. Collect or get it delivered.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237a1f2b'/%3E%3Crect x='6' y='6' width='52' height='52' rx='9' fill='none' stroke='%23fbf7ef' stroke-width='3'/%3E%3Ctext x='32' y='41' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='22' text-anchor='middle' fill='%23fbf7ef'%3ESFB%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Doto:wght@600..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="logo">🐟 Station Fish Bar</a>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#menu">Menu</a>
-            <a href="#location">Location</a>
-            <a href="delivery.html" class="nav-btn">Order Online</a>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Fresh, Hot, Classic.</h1>
-            <p>Shirley's favorite local chippy serving legendary fish, chips, pies, and kebabs.</p>
-            <a href="delivery.html" class="hero-btn">Order Delivery or Collect</a>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="sign sign--sm" href="index.html" aria-label="Station Fish Bar, home">Station Fish Bar</a>
+            <nav aria-label="Main">
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hours">Opening times</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#find-us">Find us</a></li>
+                    <li><a class="btn btn--mustard btn--sm" href="delivery.html">Order</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- About -->
-    <section id="about" class="section">
-        <h2>A Shirley Tradition</h2>
-        <p class="lead">We pride ourselves on using top-quality ingredients, from our crispy golden batter to freshly sourced fish. Whether you're a local regular or just passing through, our family-run bar is ready to serve you the perfect takeaway experience.</p>
-    </section>
+    <main id="main">
 
-    <!-- Menu Highlights -->
-    <section id="menu" class="section" style="background: white; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; max-width: 100%;">
-        <div style="max-width: 1100px; margin: auto;">
-            <h2>Menu Highlights</h2>
-            <p class="lead" style="margin-bottom: 0;">Our best-sellers that keep customers coming back.</p>
-            
-            <div class="menu-grid">
-                <div class="menu-card">
-                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/04654ee207a57ce8d46665ebeb575e24" alt="Classic Fish and Chips" class="menu-image">
-                    <h3>Classic Fish & Chips</h3>
-                    <p>Sustainably caught, thickly battered, and served with a mountain of chunky, authentic chip shop chips. Add mushy peas to complete the masterpiece.</p>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Fish &amp; chips · Shirley, Solihull</p>
+                    <h1>Your stop for proper fish &amp; chips.</h1>
+                    <p class="lede">Battered fish, chip shop chips, kebabs, burgers and pies on Haslucks Green Road. Call ahead to collect, or get it delivered.</p>
+                    <div class="actions">
+                        <a class="btn btn--mustard btn--lg" href="tel:+441217441234">
+                            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+                            Call to collect <span class="btn-sub">0121 744 1234</span>
+                        </a>
+                        <a class="btn btn--ghost btn--lg" href="delivery.html">Order delivery</a>
+                    </div>
+                    <a class="status" href="#hours" data-open-status>See today’s opening times</a>
                 </div>
-                <div class="menu-card">
-                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/a8c4ebc581122dfbf8ee55306ea1658d" alt="Hot Pies" class="menu-image">
-                    <h3>Pukka Pies</h3>
-                    <p>Deliciously flaky pastry packed with rich, savory fillings. Choose from Steak & Kidney, Chicken & Mushroom, or our hearty Minced Beef pies.</p>
-                </div>
-                <div class="menu-card">
-                    <img src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/f_auto/q_auto/v1/uk/dishes/281028/fce641b14d7d11b47f0d47ece8053d35" alt="Doner Kebab" class="menu-image">
-                    <h3>Kebabs & Burgers</h3>
-                    <p>Not in the mood for fish? We offer generously portioned Doner Kebabs served fresh from the spit, alongside juicy, fully loaded burgers.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer / Location -->
-    <footer id="location">
-        <h3>Visit Us Today</h3>
-        <p>Bypass the delivery fees and call us directly for collection.</p>
-        
-        <div class="contact-grid">
-            <div class="contact-card">
-                <h4>📍 Location</h4>
-                <span>341 Haslucks Green Rd</span>
-                <span>Shirley, Solihull</span>
-                <span>B90 2NG</span>
-                <br>
-                <a href="tel:01217441234" style="color: white; text-decoration: none; font-weight: 700; font-size: 1.2rem; background: var(--primary); padding: 10px 20px; border-radius: 8px; display: inline-block;">☎️ Call 01217441234</a>
+                <div class="hero-media">
+                    <span class="sign sign--lg" aria-hidden="true">Station Fish Bar</span>
+                    <figure class="ph ph--hero">
+                        <img src="assets/photos/hero-fish-and-chips.jpg" alt="Fish and chips from Station Fish Bar" fetchpriority="high">
+                        <figcaption class="ph-brief">
+                            <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                            <span class="ph-tag">Photo needed · 01</span>
+                            <span class="ph-title">Hero: fish &amp; chips</span>
+                            <span class="ph-desc">Your best-looking portion of fish and chips, shot close in daylight. Keep the fish in the centre: the edges get cropped on phones.</span>
+                            <span class="ph-spec">Portrait 4:5 · at least 1600 × 2000px<br>assets/photos/hero-fish-and-chips.jpg</span>
+                        </figcaption>
+                    </figure>
+                </div>
             </div>
-            <div class="contact-card">
-                <h4>🕒 Opening Hours</h4>
-                <ul>
-                    <li><strong>Mon - Sat:</strong> 16:30 - 22:00</li>
-                    <li style="color: #ef4444; margin-top: 10px;"><strong>Sunday:</strong> Closed</li>
-                </ul>
+        </section>
+
+        <!-- Opening times, as a departures board -->
+        <section id="hours" class="board-band" aria-labelledby="hours-title">
+            <div class="wrap">
+                <div class="board">
+                    <div class="board-head">
+                        <h2 id="hours-title" class="board-title">Opening times</h2>
+                        <p class="board-clock" data-clock aria-hidden="true"></p>
+                        <p class="board-now" data-open-status>Lunch and evenings, Monday to Saturday</p>
+                    </div>
+                    <table class="board-table">
+                        <thead>
+                            <tr><th scope="col">Day</th><th scope="col">Lunch</th><th scope="col">Evening</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr data-day="1" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Mon</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="2" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Tue</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="3" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Wed</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="4" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Thu</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="5" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Fri</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="6" data-hours="11:30-14:00 16:30-22:00"><th scope="row">Sat</th><td>11:30–14:00</td><td>16:30–22:00</td></tr>
+                            <tr data-day="0" data-hours="16:30-22:00"><th scope="row">Sun</th><td class="is-closed">Closed</td><td>16:30–22:00</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        
-        <div class="copyright">
-            © 2026 Station Fish Bar. All rights reserved.
+        </section>
+
+        <!-- Menu -->
+        <section id="menu" class="section section--paper" aria-labelledby="menu-title">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">On the menu</p>
+                    <h2 id="menu-title">Chippy classics, and then some.</h2>
+                    <p>Fish and chips is the main event. There are kebabs, burgers and pies too, plus meal deals with a can of pop.</p>
+                </div>
+
+                <div class="menu-grid">
+                    <article class="menu-card">
+                        <figure class="ph">
+                            <img src="assets/photos/menu-fish-and-chips.jpg" alt="Battered fish and chips" loading="lazy">
+                            <figcaption class="ph-brief">
+                                <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                                <span class="ph-tag">Photo needed · 02</span>
+                                <span class="ph-title">Fish &amp; chips, as served</span>
+                                <span class="ph-spec">Landscape 4:3 · 1600 × 1200px<br>assets/photos/menu-fish-and-chips.jpg</span>
+                            </figcaption>
+                        </figure>
+                        <div class="menu-body">
+                            <h3><span class="plat" aria-hidden="true">1</span>Fish &amp; chips</h3>
+                            <p>Fish in golden batter with a proper portion of chip shop chips. Add mushy peas.</p>
+                        </div>
+                    </article>
+
+                    <article class="menu-card">
+                        <figure class="ph">
+                            <img src="assets/photos/menu-station-specials.jpg" alt="A Station Special meal deal" loading="lazy">
+                            <figcaption class="ph-brief">
+                                <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                                <span class="ph-tag">Photo needed · 03</span>
+                                <span class="ph-title">A Station Special with its can</span>
+                                <span class="ph-spec">Landscape 4:3 · 1600 × 1200px<br>assets/photos/menu-station-specials.jpg</span>
+                            </figcaption>
+                        </figure>
+                        <div class="menu-body">
+                            <h3><span class="plat" aria-hidden="true">2</span>Station Specials</h3>
+                            <p>Meal deals with chips and a can of pop: small fish, doner meat, chicken or battered halloumi.</p>
+                        </div>
+                    </article>
+
+                    <article class="menu-card">
+                        <figure class="ph">
+                            <img src="assets/photos/menu-kebabs-burgers.jpg" alt="A doner kebab and a burger" loading="lazy">
+                            <figcaption class="ph-brief">
+                                <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                                <span class="ph-tag">Photo needed · 04</span>
+                                <span class="ph-title">Kebab and burger, side by side</span>
+                                <span class="ph-spec">Landscape 4:3 · 1600 × 1200px<br>assets/photos/menu-kebabs-burgers.jpg</span>
+                            </figcaption>
+                        </figure>
+                        <div class="menu-body">
+                            <h3><span class="plat" aria-hidden="true">3</span>Kebabs &amp; burgers</h3>
+                            <p>Doner kebabs and burgers, with chips on the side and your choice of sauce.</p>
+                        </div>
+                    </article>
+
+                    <article class="menu-card">
+                        <figure class="ph">
+                            <img src="assets/photos/menu-pies.jpg" alt="A Pukka pie with chips" loading="lazy">
+                            <figcaption class="ph-brief">
+                                <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                                <span class="ph-tag">Photo needed · 05</span>
+                                <span class="ph-title">Pie and chips</span>
+                                <span class="ph-spec">Landscape 4:3 · 1600 × 1200px<br>assets/photos/menu-pies.jpg</span>
+                            </figcaption>
+                        </figure>
+                        <div class="menu-body">
+                            <h3><span class="plat" aria-hidden="true">4</span>Pies</h3>
+                            <p>Pukka pies, served hot. Have one with chips.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="menu-note">Full menu and prices are on <a href="delivery.html">our ordering apps</a>.</p>
+            </div>
+        </section>
+
+        <!-- The shop -->
+        <section class="section" aria-labelledby="shop-title">
+            <div class="wrap split">
+                <figure class="ph" style="--ratio: 5 / 4">
+                    <img src="assets/photos/counter.jpg" alt="Behind the counter at Station Fish Bar" loading="lazy">
+                    <figcaption class="ph-brief">
+                        <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                        <span class="ph-tag">Photo needed · 06</span>
+                        <span class="ph-title">Behind the counter</span>
+                        <span class="ph-desc">The fryers in action, or the team at the counter during service.</span>
+                        <span class="ph-spec">Landscape 5:4 · 2000 × 1600px<br>assets/photos/counter.jpg</span>
+                    </figcaption>
+                </figure>
+                <div class="copy">
+                    <p class="eyebrow">The shop</p>
+                    <h2 id="shop-title">A local chippy on Haslucks Green Road.</h2>
+                    <p>Station Fish Bar is a takeaway in Shirley, Solihull. Come in and order at the counter, ring ahead and collect, or have it delivered through Just Eat, Deliveroo or Uber Eats.</p>
+                    <p>We’re open for lunch and again in the evening, Monday to Saturday, and on Sunday evenings too.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order: collection or delivery -->
+        <section id="order" class="section section--maroon" aria-labelledby="order-title">
+            <div class="wrap">
+                <div class="ticket">
+                    <div class="ticket-main">
+                        <p class="eyebrow">Collection</p>
+                        <h2 id="order-title">Ring ahead, then pick it up.</h2>
+                        <p>Call your order through and collect it from the shop. No app, no delivery fee.</p>
+                        <a class="btn btn--maroon btn--lg" href="tel:+441217441234">
+                            <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+                            Call 0121 744 1234
+                        </a>
+                        <p class="ticket-addr">341 Haslucks Green Road, Shirley, B90 2NG</p>
+                    </div>
+                    <div class="ticket-stub">
+                        <p class="eyebrow">Delivery</p>
+                        <h3>Order on your app</h3>
+                        <p class="ticket-route"><span>From</span> <b>Station Fish Bar</b> <span aria-hidden="true">→</span> <span>To</span> <b>Your door</b></p>
+                        <ul class="apps">
+                            <li><a class="app" href="https://www.just-eat.co.uk/restaurants-station-fish-bar-shirley/menu" target="_blank" rel="noopener"><span class="app-dot" style="background:#ff8000" aria-hidden="true"></span>Just Eat<span class="app-arrow" aria-hidden="true">↗</span></a></li>
+                            <li><a class="app" href="https://deliveroo.co.uk/menu/birmingham/shirley/station-fish-bar-shirley" target="_blank" rel="noopener"><span class="app-dot" style="background:#00ccbc" aria-hidden="true"></span>Deliveroo<span class="app-arrow" aria-hidden="true">↗</span></a></li>
+                            <li><a class="app" href="https://www.ubereats.com/gb/store/station-fish-bar/vtC_X7L_QDujMJoUgb4_EA" target="_blank" rel="noopener"><span class="app-dot" style="background:#06c167" aria-hidden="true"></span>Uber Eats<span class="app-arrow" aria-hidden="true">↗</span></a></li>
+                        </ul>
+                        <p class="apps-note">Each app sets its own prices and delivery times.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Find us -->
+        <section id="find-us" class="section find" aria-labelledby="find-title">
+            <div class="wrap split split--flip">
+                <figure class="ph" style="--ratio: 3 / 2">
+                    <img src="assets/photos/shopfront.jpg" alt="The Station Fish Bar shopfront on Haslucks Green Road" loading="lazy">
+                    <figcaption class="ph-brief">
+                        <svg class="ph-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                        <span class="ph-tag">Photo needed · 07</span>
+                        <span class="ph-title">The shopfront</span>
+                        <span class="ph-desc">From across the road, sign readable, ideally at dusk with the lights on. Helps people spot you.</span>
+                        <span class="ph-spec">Landscape 3:2 · 2400 × 1600px<br>assets/photos/shopfront.jpg</span>
+                    </figcaption>
+                </figure>
+                <div class="copy">
+                    <p class="eyebrow">Find us</p>
+                    <h2 id="find-title">341 Haslucks Green Road</h2>
+                    <address>Shirley, Solihull<br>B90 2NG</address>
+                    <div class="actions">
+                        <a class="btn btn--maroon" href="https://www.google.com/maps/dir/?api=1&amp;destination=Station+Fish+Bar%2C+341+Haslucks+Green+Rd%2C+Shirley%2C+B90+2NG" target="_blank" rel="noopener">Get directions</a>
+                        <a class="btn btn--ghost" href="tel:+441217441234">Call 0121 744 1234</a>
+                    </div>
+                    <p class="hours-mini">Mon–Sat 11:30–14:00 and 16:30–22:00<br>Sun 16:30–22:00</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <a class="sign sign--sm" href="index.html" aria-label="Station Fish Bar, home">Station Fish Bar</a>
+            <div class="footer-grid">
+                <div>
+                    <h2>Visit</h2>
+                    <address>341 Haslucks Green Road<br>Shirley, Solihull<br>B90 2NG</address>
+                </div>
+                <div>
+                    <h2>Call to collect</h2>
+                    <p><a href="tel:+441217441234">0121 744 1234</a></p>
+                </div>
+                <div>
+                    <h2>Opening times</h2>
+                    <p>Mon–Sat 11:30–14:00<br>and 16:30–22:00<br>Sun 16:30–22:00</p>
+                </div>
+                <div>
+                    <h2>Order delivery</h2>
+                    <ul>
+                        <li><a href="https://www.just-eat.co.uk/restaurants-station-fish-bar-shirley/menu" target="_blank" rel="noopener">Just Eat</a></li>
+                        <li><a href="https://deliveroo.co.uk/menu/birmingham/shirley/station-fish-bar-shirley" target="_blank" rel="noopener">Deliveroo</a></li>
+                        <li><a href="https://www.ubereats.com/gb/store/station-fish-bar/vtC_X7L_QDujMJoUgb4_EA" target="_blank" rel="noopener">Uber Eats</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="legal">
+                <span>© 2026 Station Fish Bar</span>
+                <span>341 Haslucks Green Road, Shirley, B90 2NG</span>
+            </div>
         </div>
     </footer>
 
+    <div class="action-bar">
+        <a class="btn btn--mustard" href="tel:+441217441234">Call to collect</a>
+        <a class="btn btn--maroon" href="delivery.html">Order delivery</a>
+    </div>
+
+    <script src="assets/site.js"></script>
 </body>
 </html>
